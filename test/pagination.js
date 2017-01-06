@@ -155,6 +155,39 @@ describe("Testing jsonapi-server", function() {
     });
   });
 
+  describe('correctly computes the last pages', done => {
+    let page = {
+      offset: 0,
+      limit: 0
+    }
+    let request = {
+      params: {
+        page
+      },
+      route: {
+        combined: ''
+      }
+    }
+
+    it('with limit 4', () => {
+      page.limit = 4
+      let result = pagination.generatePageLinks(request, 16)
+      assert.ok(result.last.match(/page%5Boffset%5D=12/), 'last should target offset=12')
+    })
+
+    it('with limit 5', () => {
+      page.limit = 5
+      let result = pagination.generatePageLinks(request, 16)
+      assert.ok(result.last.match(/page%5Boffset%5D=15/), 'last should target offset=15')
+    })
+
+    it('with limit 6', () => {
+      page.limit = 6
+      let result = pagination.generatePageLinks(request, 16)
+      assert.ok(result.last.match(/page%5Boffset%5D=12/), 'last should target offset=12')
+    })
+  })
+
   before(function() {
     jsonApiTestServer.start();
   });
