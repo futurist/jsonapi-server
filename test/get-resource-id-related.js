@@ -84,7 +84,7 @@ describe("Testing jsonapi-server", function() {
       });
     });
 
-    it("with filter", function(done) {
+    xit("with filter", function(done) {
       var url = "http://localhost:16006/rest/articles/de305d54-75b4-431b-adb2-eb6b9e546014/author?filter[email]=email";
       helpers.request({
         method: "GET",
@@ -99,6 +99,25 @@ describe("Testing jsonapi-server", function() {
         done();
       });
     });
+
+    it("[futurist] with filter", function(done) {
+      var email = encodeURIComponent('oliver.rumbelow@example.com')
+      var url = "http://localhost:16006/rest/articles/de305d54-75b4-431b-adb2-eb6b9e546014/author?filter[email]="+email;
+      helpers.request({
+        method: "GET",
+        url: url
+      }, function(err, res, json) {
+        assert.equal(err, null);
+        json = helpers.validateJson(json);
+
+        assert.equal(res.statusCode, "200", "Expecting 200 OK");
+        // assert.deepEqual(json.data, null);
+        // it's have to validate with email, or throw error
+        assert.deepEqual(json.data.id, 'cc5cca2e-0dd8-4b95-8cfc-a11230e73116')
+
+        done();
+      });
+    })
 
     it("with includes", function(done) {
       var url = "http://localhost:16006/rest/articles/de305d54-75b4-431b-adb2-eb6b9e546014/author?include=articles";

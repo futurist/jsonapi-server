@@ -10,8 +10,8 @@ jsonApi.define({
     body: jsonApi.Joi.string()
       .description("The tag name")
       .example("Summer"),
-    timestamp: jsonApi.Joi.string()
-      .description("The date on which the comment was created, YYYY-MM-DD (TODO: change to date() format)")
+    timestamp: jsonApi.Joi.string().regex(/^[12]\d\d\d-[01]\d-[0123]\d$/)
+      .description("The date on which the comment was created, YYYY-MM-DD")
       .example("2017-05-01"),
     author: jsonApi.Joi.one("people")
       .description("The person who wrote the comment"),
