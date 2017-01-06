@@ -2,6 +2,7 @@
 var assert = require("assert");
 var helpers = require("./helpers.js");
 var jsonApiTestServer = require("../example/server.js");
+const pagination = require('../lib/pagination.js')
 
 var pageLinks;
 
