@@ -30,6 +30,7 @@
     "lodash.omit": "3.1.0",
     "lodash.pick": "3.1.0",
     "lodash.uniq": "3.2.2",
+    "ms": "^0.7.2",
     "node-uuid": "1.4.3",
     "request": "2.63.0",
     "v8-profiler": "5.5.0"
